@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kilat Laundry · Cuci kiloan antar-jemput (demo latihan)</title>
+<meta name="description" content="Halaman demo untuk latihan Google Tag Manager, GA4, dan tracking klik WhatsApp. Usaha fiktif.">
+
+<!-- ============================================================
+     LANGKAH 1: GANTI GTM-XXXXXXX dengan ID container GTM kamu
+     (ada 2 tempat: di sini dan tepat setelah <body>)
+     ============================================================ -->
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-XXXXXXX');</script>
+<!-- End Google Tag Manager -->
+
+<style>
+  :root{
+    --bg:#f6f4ef; --ink:#1c2321; --muted:#5b6461; --card:#fff; --line:#e4e0d6;
+    --brand:#0f6b5c; --brand-ink:#fff; --wa:#1fa855;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+  a{color:inherit}
+  .wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+
+  .demo-bar{background:#2b2b2b;color:#f1f1f1;font-size:13px;text-align:center;padding:6px 12px}
+
+  header{background:var(--card);border-bottom:1px solid var(--line)}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px}
+  .logo{font-weight:800;font-size:19px;letter-spacing:-.01em;text-decoration:none}
+  .logo span{color:var(--brand)}
+  nav a{margin-left:22px;text-decoration:none;color:var(--muted);font-size:15px}
+  nav a:hover{color:var(--ink)}
+
+  .hero{padding:64px 0 48px}
+  .hero .wrap{display:grid;grid-template-columns:1.2fr .8fr;gap:40px;align-items:center}
+  .hero h1{font-size:42px;line-height:1.12;letter-spacing:-.02em;margin:0 0 16px}
+  .hero p{font-size:18px;color:var(--muted);margin:0 0 28px;max-width:34em}
+  .cta-row{display:flex;gap:12px;flex-wrap:wrap}
+  .btn{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 22px;border-radius:10px;
+       font-weight:600;text-decoration:none;border:2px solid transparent}
+  .btn-wa{background:var(--wa);color:#fff}
+  .btn-wa:hover{filter:brightness(.95)}
+  .btn-ghost{border-color:var(--ink);color:var(--ink)}
+  .hero-card{background:var(--brand);color:var(--brand-ink);border-radius:16px;padding:28px}
+  .hero-card .big{font-size:44px;font-weight:800;line-height:1}
+  .hero-card ul{padding-left:18px;margin:16px 0 0}
+
+  section{padding:56px 0}
+  h2{font-size:28px;letter-spacing:-.01em;margin:0 0 8px}
+  .lead{color:var(--muted);margin:0 0 28px}
+
+  .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .card h3{margin:0 0 6px;font-size:18px}
+  .price{font-size:26px;font-weight:800;margin:8px 0}
+  .price small{font-size:14px;font-weight:500;color:var(--muted)}
+  .card p{color:var(--muted);margin:0 0 16px}
+
+  .steps{counter-reset:s;list-style:none;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .steps li{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .steps li::before{counter-increment:s;content:counter(s);display:inline-grid;place-items:center;width:30px;height:30px;
+       border-radius:50%;background:var(--brand);color:#fff;font-weight:700;margin-bottom:10px}
+
+  details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin-bottom:10px}
+  summary{cursor:pointer;font-weight:600}
+  details p{color:var(--muted);margin:10px 0 0}
+
+  form{display:grid;gap:12px;max-width:520px}
+  label{font-weight:600;font-size:14px}
+  input,select,textarea{width:100%;font:inherit;padding:12px;border:1px solid var(--line);border-radius:10px;background:#fff}
+  .form-note{font-size:14px;color:var(--muted)}
+  #form-ok{display:none;background:#e5f4ec;border:1px solid #b9e2c9;padding:12px;border-radius:10px}
+
+  footer{border-top:1px solid var(--line);padding:28px 0;color:var(--muted);font-size:14px}
+
+  .wa-float{position:fixed;right:20px;bottom:20px;width:60px;height:60px;border-radius:50%;background:var(--wa);
+       display:grid;place-items:center;box-shadow:0 6px 20px rgba(0,0,0,.2);z-index:10}
+  .wa-float svg{width:32px;height:32px}
+
+  @media (max-width:820px){
+    .hero .wrap{grid-template-columns:1fr}
+    .hero h1{font-size:32px}
+    .grid3,.steps{grid-template-columns:1fr}
+    nav{display:none}
+  }
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<div class="demo-bar">Website demo untuk latihan tracking. Kilat Laundry adalah usaha fiktif.</div>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#">Kilat<span>Laundry</span></a>
+    <nav>
+      <a href="#layanan">Layanan</a>
+      <a href="#cara">Cara pesan</a>
+      <a href="#faq">FAQ</a>
+      <a href="#kontak">Kontak</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Cucian beres, Anda tinggal duduk manis.</h1>
+        <p>Laundry kiloan dengan antar-jemput gratis dalam radius 3 km. Pesan lewat WhatsApp, kurir datang dalam 1 jam.</p>
+        <div class="cta-row">
+          <!-- LANGKAH 2: ganti 6281200000000 dengan nomor WhatsApp kamu sendiri (format 62..., tanpa + dan tanpa 0 di depan) -->
+          <a class="btn btn-wa" data-wa-location="hero"
+             href="https://wa.me/6285156170494?text=Halo%20Kilat%20Laundry%2C%20saya%20mau%20pesan%20jemput%20cucian">
+            Pesan via WhatsApp
+          </a>
+          <a class="btn btn-ghost" href="#layanan">Lihat harga</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="big">24 jam</div>
+        <div>selesai untuk paket reguler</div>
+        <ul>
+          <li>Dicuci terpisah per pelanggan</li>
+          <li>Ditimbang di depan Anda</li>
+          <li>Wangi pilihan: lavender, sakura, atau tanpa pewangi</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="layanan">
+    <div class="wrap">
+      <h2>Layanan dan harga</h2>
+      <p class="lead">Harga per kilogram, minimal 3 kg. Antar-jemput gratis.</p>
+      <div class="grid3">
+        <div class="card">
+          <h3>Reguler</h3>
+          <div class="price">Rp7.000 <small>/kg</small></div>
+          <p>Cuci, kering, setrika. Selesai 24 jam.</p>
+          <a class="btn btn-wa" data-wa-location="harga_reguler"
+             href="https://wa.me/6281200000000?text=Halo%2C%20saya%20mau%20pesan%20paket%20Reguler">Pesan Reguler</a>
+        </div>
+        <div class="card">
+          <h3>Kilat</h3>
+          <div class="price">Rp12.000 <small>/kg</small></div>
+          <p>Cuci, kering, setrika. Selesai 6 jam.</p>
+          <a class="btn btn-wa" data-wa-location="harga_kilat"
+             href="https://wa.me/6281200000000?text=Halo%2C%20saya%20mau%20pesan%20paket%20Kilat">Pesan Kilat</a>
+        </div>
+        <div class="card">
+          <h3>Bed cover & selimut</h3>
+          <div class="price">Rp25.000 <small>/pcs</small></div>
+          <p>Ukuran single sampai king. Selesai 2 hari.</p>
+          <a class="btn btn-wa" data-wa-location="harga_bedcover"
+             href="https://wa.me/6281200000000?text=Halo%2C%20saya%20mau%20cuci%20bed%20cover">Tanya slot</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="cara">
+    <div class="wrap">
+      <h2>Cara pesan</h2>
+      <p class="lead">Empat langkah, semua dari HP.</p>
+      <ol class="steps">
+        <li><strong>Chat WhatsApp</strong><br>Kirim alamat dan jam jemput.</li>
+        <li><strong>Kurir datang</strong><br>Cucian ditimbang di tempat.</li>
+        <li><strong>Kami cuci</strong><br>Dapat foto nota lewat WhatsApp.</li>
+        <li><strong>Diantar balik</strong><br>Bayar tunai atau QRIS saat diantar.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <h2>Pertanyaan yang sering muncul</h2>
+      <p class="lead">&nbsp;</p>
+      <details><summary>Daerah mana saja yang dijangkau?</summary><p>Radius 3 km dari outlet gratis. Lebih dari itu ada tambahan Rp5.000.</p></details>
+      <details><summary>Kalau ada pakaian rusak atau hilang?</summary><p>Kami ganti maksimal 10x biaya cuci item tersebut.</p></details>
+      <details><summary>Bisa langganan bulanan?</summary><p>Bisa. <a data-wa-location="faq" href="https://wa.me/6281200000000?text=Halo%2C%20saya%20mau%20tanya%20paket%20langganan">Tanya paket langganan via WhatsApp</a>.</p></details>
+    </div>
+  </section>
+
+  <section id="kontak">
+    <div class="wrap">
+      <h2>Lebih suka diisi formulir?</h2>
+      <p class="lead">Isi data di bawah, nanti kami yang menghubungi Anda.</p>
+      <!-- Form latihan: tidak mengirim data ke mana pun. Berguna untuk latihan tracking form_submit nanti. -->
+      <form id="form-jemput" onsubmit="event.preventDefault(); document.getElementById('form-ok').style.display='block'; this.reset(); window.dataLayer=window.dataLayer||[]; dataLayer.push({event:'form_jemput_submit'});">
+        <div><label for="nama">Nama</label><input id="nama" name="nama" required></div>
+        <div><label for="alamat">Alamat jemput</label><textarea id="alamat" name="alamat" rows="2" required></textarea></div>
+        <div><label for="paket">Paket</label>
+          <select id="paket" name="paket"><option>Reguler</option><option>Kilat</option><option>Bed cover</option></select></div>
+        <button class="btn btn-wa" type="submit" style="border:0;cursor:pointer;justify-self:start">Minta dijemput</button>
+        <p class="form-note">Ini form demo. Data tidak dikirim ke mana pun.</p>
+        <div id="form-ok" role="status">Terima kasih! (Demo) Di website asli, kami akan menghubungi Anda dalam 15 menit.</div>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Kilat Laundry (usaha fiktif untuk latihan) · Buka setiap hari 07.00–21.00</div>
+</footer>
+
+<a class="wa-float" data-wa-location="floating" aria-label="Chat WhatsApp"
+   href="https://wa.me/6281200000000?text=Halo%20Kilat%20Laundry">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="#fff" d="M16 3a13 13 0 0 0-11.2 19.6L3 29l6.6-1.7A13 13 0 1 0 16 3zm0 23.7c-2 0-4-.6-5.7-1.6l-.4-.2-3.9 1 1-3.8-.3-.4A10.7 10.7 0 1 1 16 26.7zm5.9-8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1a8.8 8.8 0 0 1-4.4-3.8c-.3-.6.3-.5 1-1.7.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8 0 1.6 1.2 3.2 1.3 3.4.2.2 2.3 3.5 5.6 4.9 2.1.9 2.9 1 4 .8.6-.1 1.9-.8 2.2-1.5.3-.8.3-1.4.2-1.5-.1-.2-.3-.3-.7-.4z"/></svg>
+</a>
+</body>
+</html>
